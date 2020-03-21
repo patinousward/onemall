@@ -81,7 +81,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         ProductSpuDetailBO result = productSpuService.getProductSpuDetail(id);
         // 存储到 ES 中
         ESProductDO product = convert(result);
-        productRepository.save(product);
+        productRepository.save(product);//jpa的api
         // 返回成功
         return true;
     }

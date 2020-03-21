@@ -61,6 +61,7 @@ public class PayNotifyServiceImpl {
     }
 
     public void sendNotifyMessage(PayNotifyTaskDO notifyTask) {
+        //TRANSACTION 支付 REFUND 退款
         if (PayNotifyType.TRANSACTION.getValue().equals(notifyTask.getType())) {
             rocketMQTemplate.convertAndSend(PayTransactionSuccessMessage.TOPIC,
                     PayNotifyConvert.INSTANCE.convertTransaction(notifyTask));

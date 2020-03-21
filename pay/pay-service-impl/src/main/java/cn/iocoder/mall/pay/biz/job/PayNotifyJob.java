@@ -31,7 +31,7 @@ public class PayNotifyJob extends IJobHandler {
     private RocketMQTemplate rocketMQTemplate;
 
     @Override
-    public ReturnT<String> execute(String param) {
+    public ReturnT<String> execute(String param) { //jobHandleer 会处理这个job
         // 获得需要通知的任务
         List<PayNotifyTaskDO> notifyTasks = payTransactionNotifyTaskMapper.selectByNotify();
         // 循环任务，发送通知

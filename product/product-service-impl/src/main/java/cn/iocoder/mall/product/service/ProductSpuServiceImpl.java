@@ -204,6 +204,13 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         }
     }
 
+    /**
+     * 更新产品的spu分类（MQ）
+     * @param adminId
+     * @param spuId
+     * @param sort
+     * @return
+     */
     @Override
     public Boolean updateProductSpuSort(Integer adminId, Integer spuId, Integer sort) {
         // 校验 Spu 是否存在
@@ -347,6 +354,10 @@ public class ProductSpuServiceImpl implements ProductSpuService {
     }
 
     private void sendProductUpdateMessage(Integer id) {
+        //Message相当于发送内容的容器
+        //convertAndSend 可以通过tag（标签进行消费），比如ProductUpdateMessage.TOPIC + tag0，ProductUpdateMessage.TOPIC + tag1
+        //可以针对tag1进行消费
+        //org.apache.rocketmq.spring.core.RocketMQTemplate.doSend 可以看出，发送是同步的
         rocketMQTemplate.convertAndSend(ProductUpdateMessage.TOPIC, new ProductUpdateMessage().setId(id));
     }
 
